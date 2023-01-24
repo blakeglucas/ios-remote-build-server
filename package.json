@@ -5,7 +5,7 @@
   "main": "./bin/index.js",
   "types": "./bin/cli.d.ts",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@types/figlet": "^1.5.5",
     "@types/fs-extra": "^11.0.1",
