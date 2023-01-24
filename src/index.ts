@@ -1,8 +1,7 @@
 import { Server, Socket } from 'socket.io';
-import { Client } from './Client';
-import { IDisposable } from './interfaces/IDisposable';
+import { ClientHandler } from './ClientHandler';
 
-const connectedClients: Record<string, IDisposable> = {};
+const connectedClients: Record<string, ClientHandler> = {};
 
 async function main() {
   const io = new Server({ maxHttpBufferSize: 1e9 });
@@ -10,16 +9,17 @@ async function main() {
   io.on('connection', (socket: Socket) => {
     socket.on('disconnect', async () => {
       console.log(socket.id + ' disconnected');
-      const clientDisposable = connectedClients[socket.id];
-      if (clientDisposable) {
-        await clientDisposable.dispose();
+      if (connectedClients[socket.id]) {
+        // await clientDisposable.dispose();
+        delete connectedClients[socket.id];
       }
     });
     console.log(socket.id + ' connected');
-    connectedClients[socket.id] = new Client(socket);
+    connectedClients[socket.id] = new ClientHandler(socket);
   });
 
-  io.listen(6969);
+  const port = Number(process.env.PORT || 6969);
+  io.listen(port);
 }
 
 main();

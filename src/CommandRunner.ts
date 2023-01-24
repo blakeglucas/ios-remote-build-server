@@ -7,15 +7,22 @@ type ProcessRunnerOptions = Partial<{
   onError: (err: Error) => unknown | Promise<unknown>;
   onClose: (code: number | null) => void | Promise<void>;
   spawnOptions: SpawnOptionsWithoutStdio;
+  signal: AbortSignal,
 }>;
 
-export async function CommandRunner(
+export function CommandRunner(
   cmd: string | string[],
   cwd: string | PathLike,
   options?: ProcessRunnerOptions
 ) {
+  const { signal } = options || {}
   const cmdStr = Array.isArray(cmd) ? cmd.join(' ') : cmd;
-  return await new Promise<number | null>((resolve, reject) => {
+  return new Promise<number | null>((resolve, reject) => {
+    if (signal) {
+      signal.addEventListener('abort', () => {
+        proc.kill()
+      })
+    }
     const proc = spawn(cmdStr, {
       shell: true,
       cwd: cwd.toString(),
