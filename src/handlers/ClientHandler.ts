@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
-import { BuildHandler } from './handlers/BuildHandler';
-import { WorkspaceHandler } from './handlers/WorkspaceHandler';
+import { BuildHandler } from './BuildHandler';
+import { WorkspaceHandler } from './WorkspaceHandler';
 
 export class ClientHandler {
   private readonly buildHandler: BuildHandler;

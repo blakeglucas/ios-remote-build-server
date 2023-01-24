@@ -2,7 +2,7 @@ import { Socket } from 'socket.io';
 
 import { BuildPayload } from '../types/BuildPayload';
 import { HandlerBase } from '../utils/HandlerBase';
-import { CommandRunner } from '../CommandRunner';
+import { CommandRunner } from '../utils/CommandRunner';
 import fsx from 'fs-extra';
 import { IOSBuild } from '../builds/ios.build';
 import path from 'path';
@@ -18,6 +18,9 @@ export class BuildHandler extends HandlerBase implements IDisposable {
   constructor(protected readonly socket: Socket) {
     super(socket);
     this.buildStart = this.buildStart.bind(this);
+    this.buildCancel = this.buildCancel.bind(this);
+    this.runBuild = this.runBuild.bind(this);
+    this.listBuilds = this.listBuilds.bind(this);
     socket.on('build/start', this.buildStart);
     socket.on('build/cancel', this.buildCancel);
     socket.on('build/run', this.runBuild);
@@ -81,8 +84,8 @@ export class BuildHandler extends HandlerBase implements IDisposable {
   }
 
   dispose(): void | Promise<void> {
-    this.stopRun()
-    this.buildCancel()
+    this.stopRun();
+    this.buildCancel();
     this.socket.off('build/start', this.buildStart);
     this.socket.off('build/cancel', this.buildCancel);
     this.socket.off('build/run', this.runBuild);

@@ -7,7 +7,7 @@ import path from 'path';
 import { Socket } from 'socket.io';
 import { Readable, Writable } from 'stream';
 import tar from 'tar-fs';
-import { CommandRunner } from '../CommandRunner';
+import { CommandRunner } from '../utils/CommandRunner';
 import { BuildBase } from '../utils/BuildBase';
 import { create } from 'xmlbuilder2';
 

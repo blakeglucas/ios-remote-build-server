@@ -10,7 +10,7 @@ import { IOSBuild } from '../builds/ios.build';
 import tar from 'tar-fs';
 import readdir_recursive from 'recursive-readdir';
 import { Readable } from 'stream';
-import { CommandRunner } from '../CommandRunner';
+import { CommandRunner } from '../utils/CommandRunner';
 import { IDisposable } from '../interfaces/IDisposable';
 
 export class WorkspaceHandler extends HandlerBase implements IDisposable {

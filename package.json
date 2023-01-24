@@ -1,10 +1,12 @@
 {
-  "name": "expo-accelerator-server",
+  "name": "ios-remote-build-server",
+  "displayName": "iOS Remote Build Server",
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@types/figlet": "^1.5.5",
     "@types/fs-extra": "^11.0.1",
     "@types/glob": "^8.0.1",
     "@types/node": "^18.11.18",
@@ -16,7 +18,9 @@
   },
   "dependencies": {
     "@gerhobbelt/gitignore-parser": "^0.2.0-9",
+    "commander": "^10.0.0",
     "date-fns": "^2.29.3",
+    "figlet": "^1.5.2",
     "fs-extra": "^11.1.0",
     "glob": "^8.1.0",
     "ignore": "^5.2.4",
@@ -25,9 +29,15 @@
     "socket.io-client": "^4.5.4",
     "tar-fs": "^2.1.1",
     "temp-dir": "^3.0.0",
+    "winston": "^3.8.2",
     "xmlbuilder2": "^3.0.2"
   },
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/cli.ts",
+    "build": "tsc"
+  },
+  "bin": {
+    "iosRemoteBuildServer": "./bin/cli.js",
+    "ios-remote-build-server": "./bin/cli.js"
   }
 }
