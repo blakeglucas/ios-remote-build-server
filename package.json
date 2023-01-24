@@ -37,7 +37,6 @@
     "build": "tsc"
   },
   "bin": {
-    "iosRemoteBuildServer": "./bin/cli.js",
     "ios-remote-build-server": "./bin/cli.js"
   }
 }
