@@ -1,0 +1,4 @@
+.builds/
+.workspaces/
+bin/
+logs/

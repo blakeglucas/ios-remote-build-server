@@ -11,27 +11,6 @@ import { CommandRunner } from '../utils/CommandRunner';
 import { BuildBase } from '../utils/BuildBase';
 import { create } from 'xmlbuilder2';
 
-// if (archiveRet !== 0) {
-//   return;
-// }
-
-// // Export archive
-
-// const ignoredPaths = ignoreParser.compile('Pods/');
-
-// if (exportRet === 0) {
-//   if (isWorkspaceBuild) {
-//     this.socket.emit('build/ws/finish');
-//   } else {
-//     this.socket.emit('build/finish', 0, iosFolder);
-//   }
-// } else {
-//   this.socket.emit(
-//     isWorkspaceBuild ? 'build/ws/finish' : 'build/finish',
-//     exportRet
-//   );
-// }
-
 export class IOSBuild extends BuildBase {
   constructor(
     protected readonly socket: Socket,
