@@ -19,7 +19,6 @@
     "typescript": "^4.9.4"
   },
   "dependencies": {
-    "@gerhobbelt/gitignore-parser": "^0.2.0-9",
     "commander": "^10.0.0",
     "date-fns": "^2.29.3",
     "figlet": "^1.5.2",
@@ -30,14 +29,12 @@
     "socket.io": "^4.5.4",
     "socket.io-client": "^4.5.4",
     "tar-fs": "^2.1.1",
-    "temp-dir": "^3.0.0",
     "winston": "^3.8.2",
     "xmlbuilder2": "^3.0.2"
   },
   "scripts": {
     "start": "ts-node src/cli.ts",
-    "build": "tsc",
-    "prepare": "husky install"
+    "build": "tsc"
   },
   "bin": {
     "iosRemoteBuildServer": "./bin/cli.js",
