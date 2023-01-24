@@ -2,7 +2,8 @@
   "name": "ios-remote-build-server",
   "displayName": "iOS Remote Build Server",
   "version": "0.1.0",
-  "main": "index.js",
+  "main": "./bin/index.js",
+  "types": "./bin/cli.d.ts",
   "license": "MIT",
   "private": true,
   "devDependencies": {
@@ -36,7 +37,5 @@
     "start": "ts-node src/cli.ts",
     "build": "tsc"
   },
-  "bin": {
-    "ios-remote-build-server": "./bin/cli.js"
-  }
+  "bin": "node ./bin/cli.js"
 }

@@ -1,0 +1,7 @@
+.husky/
+.builds/
+.workspaces/
+logs/
+*.log
+.prettierignore
+.prettierrc
