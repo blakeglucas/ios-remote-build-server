@@ -1,6 +1,8 @@
-import { PathLike } from 'fs';
 import { Socket } from 'socket.io';
+import { getLogger } from '../logger';
 import { HandlerBase } from './HandlerBase';
+
+const logger = getLogger(__filename);
 
 export type BuildStep = {
   id?: number;
@@ -20,7 +22,7 @@ export abstract class BuildBase extends HandlerBase {
     protected readonly socket: Socket,
     protected readonly stepsToRun?: number[]
   ) {
-    super(socket);
+    super(socket, logger);
   }
 
   abstract createBuildId(): string;
@@ -41,7 +43,9 @@ export abstract class BuildBase extends HandlerBase {
         this.logMessage(`"${currentStep.name}" finished.`);
       } catch (e) {
         this.logError(
-          `Step ${currentStep.name} failed with message "${(e as Error).message}"`
+          `Step ${currentStep.name} failed with message "${
+            (e as Error).message
+          }"`
         );
         return;
       }

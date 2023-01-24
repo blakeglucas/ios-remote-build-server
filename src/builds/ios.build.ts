@@ -1,6 +1,6 @@
 import { formatISO } from 'date-fns';
 import fs from 'fs/promises';
-import fsx, { PathLike } from 'fs-extra';
+import fsx from 'fs-extra';
 import glob from 'glob';
 import ignore from 'ignore';
 import path from 'path';

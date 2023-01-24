@@ -12,6 +12,9 @@ import readdir_recursive from 'recursive-readdir';
 import { Readable } from 'stream';
 import { CommandRunner } from '../utils/CommandRunner';
 import { IDisposable } from '../interfaces/IDisposable';
+import { getLogger } from '../logger';
+
+const logger = getLogger(__filename);
 
 export class WorkspaceHandler extends HandlerBase implements IDisposable {
   private readonly workspacesPath = path.join(process.cwd(), '.workspaces');
@@ -31,7 +34,7 @@ export class WorkspaceHandler extends HandlerBase implements IDisposable {
   private runController: AbortController | undefined;
 
   constructor(protected readonly socket: Socket) {
-    super(socket);
+    super(socket, logger);
     this.activateWorkspace = this.activateWorkspace.bind(this);
     this.createWorkspace = this.createWorkspace.bind(this);
     this.syncFiles = this.syncFiles.bind(this);

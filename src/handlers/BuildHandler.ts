@@ -9,6 +9,9 @@ import path from 'path';
 import { statSync } from 'fs';
 import fs from 'fs/promises';
 import { IDisposable } from '../interfaces/IDisposable';
+import { getLogger } from '../logger';
+
+const logger = getLogger(__filename);
 
 export class BuildHandler extends HandlerBase implements IDisposable {
   private buildCancellationController: AbortController | undefined;
@@ -16,7 +19,7 @@ export class BuildHandler extends HandlerBase implements IDisposable {
   private procRunPromise: Promise<any> | undefined;
 
   constructor(protected readonly socket: Socket) {
-    super(socket);
+    super(socket, logger);
     this.buildStart = this.buildStart.bind(this);
     this.buildCancel = this.buildCancel.bind(this);
     this.runBuild = this.runBuild.bind(this);

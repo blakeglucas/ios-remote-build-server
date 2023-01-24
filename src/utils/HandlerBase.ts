@@ -3,10 +3,10 @@ import winston from 'winston';
 import { getLogger } from '../logger';
 
 export abstract class HandlerBase {
-  protected readonly logger: winston.Logger;
-  constructor(protected readonly socket: Socket) {
-    this.logger = getLogger();
-  }
+  constructor(
+    protected readonly socket: Socket,
+    protected readonly logger: winston.Logger
+  ) {}
 
   protected onStdOut(msg: string) {
     this.logger.info(msg);

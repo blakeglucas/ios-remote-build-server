@@ -7,7 +7,7 @@ type ProcessRunnerOptions = Partial<{
   onError: (err: Error) => unknown | Promise<unknown>;
   onClose: (code: number | null) => void | Promise<void>;
   spawnOptions: SpawnOptionsWithoutStdio;
-  signal: AbortSignal,
+  signal: AbortSignal;
 }>;
 
 export function CommandRunner(
@@ -15,13 +15,13 @@ export function CommandRunner(
   cwd: string | PathLike,
   options?: ProcessRunnerOptions
 ) {
-  const { signal } = options || {}
+  const { signal } = options || {};
   const cmdStr = Array.isArray(cmd) ? cmd.join(' ') : cmd;
   return new Promise<number | null>((resolve, reject) => {
     if (signal) {
       signal.addEventListener('abort', () => {
-        proc.kill()
-      })
+        proc.kill();
+      });
     }
     const proc = spawn(cmdStr, {
       shell: true,
@@ -40,15 +40,15 @@ export function CommandRunner(
     });
     proc.on('error', (err) => {
       if (options?.onError) {
-        options.onError(err)
+        options.onError(err);
       }
-      reject(err)
-    })
+      reject(err);
+    });
     proc.on('close', (code) => {
       if (options?.onClose) {
-        options.onClose(code)
+        options.onClose(code);
       }
-      resolve(code)
-    })
+      resolve(code);
+    });
   });
 }
