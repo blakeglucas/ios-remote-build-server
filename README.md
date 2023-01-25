@@ -89,6 +89,10 @@ The server accepts the following arguments:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Known Issues
+
+- Passing Provisioning Profile Specifier fails even if the provisioning profile is previously installed. For the time being, pass the full .mobileprovisioning file instead.
+
 <!-- ROADMAP -->
 
 ## Roadmap

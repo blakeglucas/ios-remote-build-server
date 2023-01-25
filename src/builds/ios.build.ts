@@ -206,9 +206,15 @@ export class IOSBuild extends BuildBase {
     if (this.exportOptionsPlist) {
       await fs.writeFile(exportOptionsPlistPath, this.exportOptionsPlist);
     } else {
+      const provisionFilePath = this.provisioningProfile
+        ? `${buildId}.mobileprovision`
+        : `~/Library/MobileDevice/Provisioning Profiles/${validatedProvisioningSpecifier}.mobileprovision`.replace(
+            /(\s+)/g,
+            '\\$1'
+          );
       const appId = await new Promise<string>((resolve) => {
         CommandRunner(
-          `security cms -D -i ${buildId}.mobileprovision | plutil -extract Entitlements.application-identifier raw -o - -`,
+          `security cms -D -i "${provisionFilePath}" | plutil -extract Entitlements.application-identifier raw -o - -`,
           iosPath,
           {
             onStdOut: (msg) => {

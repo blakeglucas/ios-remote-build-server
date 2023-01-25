@@ -33,9 +33,9 @@ export class BuildHandler extends HandlerBase implements IDisposable {
   async buildStart({
     files,
     developmentTeamId,
-    exportOptionsPlist,
     provisioningProfile,
     provisioningSpecifier,
+    exportOptionsPlist,
     release,
   }: BuildPayload) {
     const workDir = '.builds';
@@ -47,7 +47,8 @@ export class BuildHandler extends HandlerBase implements IDisposable {
       provisioningProfile,
       provisioningSpecifier,
       exportOptionsPlist,
-      release
+      release,
+      undefined
     );
     const iosFolderTar = await iosBuild.run();
     if (iosFolderTar) {
